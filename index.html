@@ -39,6 +39,12 @@
             filter: invert(0.925);
         }
 
+        .inlineimg {
+            display: block;
+            margin: 0 auto;
+            max-width: 50vw;
+        }
+
         .cursor {
             width: 20px;
             height: 20px;
@@ -99,7 +105,6 @@
         }
 
         .nav-date {
-            /* MODIFIED: Larger and brighter date */
             font-size: 1.1rem;
             letter-spacing: 0.25em;
             text-transform: uppercase;
@@ -162,7 +167,6 @@
             font-weight: 300;
             opacity: 0;
             animation: fadeIn 1s ease 0.3s forwards;
-            /* MODIFIED: Subtle background for legibility */
             background-color: rgba(13, 17, 23, 0.5);
             padding: 0.5rem 1.2rem;
             border-radius: 5px;
@@ -299,6 +303,8 @@
 
         .detail-block {
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .detail-block::before {
@@ -340,7 +346,7 @@
 
         .detail-link {
             display: inline-block;
-            margin-top: 1.5rem;
+            margin-top: auto; /* Pushes button to bottom */
             padding: 0.75rem 2rem;
             border: 0.5px solid var(--gold);
             color: var(--ivory);
@@ -381,7 +387,7 @@
         .story-container {
             max-width: 900px;
             margin: 0 auto;
-            text-align: center; /* Center align content */
+            text-align: center;
         }
 
         .story-text {
@@ -405,17 +411,14 @@
 
         /* CTA / RSVP */
         .cta-section {
-            background: linear-gradient(180deg, var(--ink), var(--charcoal));
+            /* MODIFIED: Added silhouette background with overlay */
+            background: 
+                linear-gradient(rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 0.8)),
+                url('silhouette.jpg') no-repeat center center / cover;
             padding: clamp(8rem, 25vh, 18rem) 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-
-        .cta-bg {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at center, rgba(124, 141, 181, 0.05), transparent 70%);
         }
 
         .cta-content {
@@ -617,7 +620,6 @@
                     Free parking on-site<br>
                     Wheelchair accessible
                 </div>
-                <!-- MODIFIED: Map link updated -->
                 <a href="https://maps.app.goo.gl/ZC5e5NKLKJVh68wc8" target="_blank" class="detail-link">
                     <span>Get Directions</span>
                 </a>
@@ -626,7 +628,6 @@
                 <div class="detail-number">Photography</div>
                 <h3 class="detail-heading">Capture the Moment</h3>
                 <div class="detail-content">
-                    <!-- MODIFIED: QR code added -->
                     Please share your photos with us, and use the hashtag #JoshuaAndRameen2025<br>
                     <a href="https://photos.app.goo.gl/oo1nq9vWaQTtPNq9A" target="_blank">
                         <img src="qr-code(1).png" id="qr-code" alt="Google Photos Album QR Code" style="max-width:150px; margin: 1rem 0; border: 5px solid white; border-radius: 5px;">
@@ -638,7 +639,6 @@
                 <div class="detail-number">Schedule</div>
                 <h3 class="detail-heading">Timeline</h3>
                 <div class="detail-content">
-                    <!-- MODIFIED: Shortened timeline -->
                     2:30 PM — Guest Arrival<br>
                     3:00 PM — Ceremony<br>
                     8:00 PM — Dinner & Dancing
@@ -648,18 +648,16 @@
                 <div class="detail-number">Dress Code</div>
                 <h3 class="detail-heading">Formal Attire</h3>
                 <div class="detail-content">
-                    <!-- MODIFIED: Shortened dress code -->
                     Formal attire is requested.
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- MODIFIED: RSVP section moved up -->
+    <!-- RSVP section -->
     <section class="section cta-section">
         <div class="section-number">03 — RSVP</div>
         <h2 class="section-title">Will You Join Us?</h2>
-        <div class="cta-bg"></div>
         <div class="cta-content">
             <p class="cta-subtitle" style="margin-top: -4rem;">
                 Your presence would honor us as we celebrate this milestone.<br>
@@ -679,11 +677,12 @@
             <p class="story-text">
                 In the intersection of fate and choice, we found each other. What began as a chance encounter evolved into an undeniable connection—one built on trust, laughter, and the kind of love that only grows deeper with time. Now, we invite you to witness the next chapter of our story as we commit to a lifetime together.
             </p>
+            <!-- MODIFIED: Silhouette image removed from here -->
             <div class="story-signature">Joshua & Rameen</div>
         </div>
     </section>
 
-    <!-- MODIFIED: Gift Policy section moved down -->
+    <!-- Gift Policy -->
     <section class="section">
         <div class="section-number">05 — Gift Policy</div>
         <h2 class="section-title">Your Presence, Our Present</h2>
