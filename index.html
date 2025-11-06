@@ -35,9 +35,13 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        #qr-code {
+            filter: invert(0.925);
+        }
+
         .cursor {
-            width: 40px;
-            height: 40px;
+            width: 20px;
+            height: 20px;
             border: 0.5px solid var(--gold);
             border-radius: 50%;
             position: fixed;
@@ -95,10 +99,11 @@
         }
 
         .nav-date {
-            font-size: 0.75rem;
+            /* MODIFIED: Larger and brighter date */
+            font-size: 1.1rem;
             letter-spacing: 0.25em;
             text-transform: uppercase;
-            color: var(--smoke);
+            color: var(--pearl);
             font-weight: 300;
         }
 
@@ -115,13 +120,13 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            background: 
-                linear-gradient(180deg, rgba(13, 17, 23, 0.4) 0%, var(--ink) 100%),
+            background:
+                linear-gradient(to bottom, var(--ink) 0%, transparent 40%, var(--ink) 95%),
                 url('hero3.png');
             background-size: cover;
             background-position: center;
         }
-        
+
         .hero-bg::after {
             content: '';
             position: absolute;
@@ -132,7 +137,7 @@
         .hero-grid {
             position: absolute;
             inset: 0;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(212, 165, 116, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(212, 165, 116, 0.02) 1px, transparent 1px);
             background-size: 80px 80px;
@@ -143,12 +148,12 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            margin-top:50rem;
             max-width: 1000px;
             padding: 0 2rem;
         }
 
         .hero-label {
+            display: inline-block;
             font-size: 0.7rem;
             letter-spacing: 0.4em;
             text-transform: uppercase;
@@ -157,15 +162,20 @@
             font-weight: 300;
             opacity: 0;
             animation: fadeIn 1s ease 0.3s forwards;
+            /* MODIFIED: Subtle background for legibility */
+            background-color: rgba(13, 17, 23, 0.5);
+            padding: 0.5rem 1.2rem;
+            border-radius: 5px;
+            color: var(--ivory);
         }
 
         .hero-names {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(5rem, 16vw, 14rem);
+            font-size: clamp(4rem, 16vw, 14rem);
             font-weight: 300;
             line-height: 0.9;
             letter-spacing: -0.03em;
-            margin-bottom: 5rem;
+            margin-bottom: 3rem;
             opacity: 0;
             animation: fadeIn 1s ease 0.6s forwards;
         }
@@ -181,11 +191,12 @@
         }
 
         .hero-date {
-            font-size: clamp(2rem, 4vw, 1.2rem);
-            letter-spacing: 0.8em;
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            letter-spacing: 0.6em;
             text-transform: uppercase;
             color: var(--accent);
             font-weight: 300;
+            margin-top: 5rem;
             opacity: 0;
             animation: fadeIn 1s ease 0.9s forwards;
         }
@@ -196,7 +207,7 @@
 
         /* Sections */
         .section {
-            padding: clamp(8rem, 20vh, 16rem) 4rem;
+            padding: clamp(6rem, 20vh, 16rem) 4rem;
             max-width: 1400px;
             margin: 0 auto;
             position: relative;
@@ -213,9 +224,9 @@
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 7vw, 6rem);
+            font-size: clamp(2.5rem, 7vw, 6rem);
             font-weight: 300;
-            margin-bottom: 6rem;
+            margin-bottom: 4rem;
             color: var(--ivory);
             letter-spacing: -0.02em;
         }
@@ -223,7 +234,7 @@
         /* Countdown */
         .countdown-wrapper {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1px;
             background: rgba(212, 165, 116, 0.05);
             border: 0.5px solid rgba(212, 165, 116, 0.1);
@@ -231,7 +242,7 @@
 
         .time-cell {
             background: var(--charcoal);
-            padding: 5rem 2rem;
+            padding: 3rem 1.5rem;
             text-align: center;
             position: relative;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -256,7 +267,7 @@
 
         .time-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(4rem, 8vw, 7rem);
+            font-size: clamp(3rem, 8vw, 7rem);
             font-weight: 300;
             line-height: 1;
             color: var(--ivory);
@@ -275,8 +286,15 @@
         /* Details */
         .details-layout {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 6rem;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+        
+        @media (min-width: 768px) {
+            .details-layout {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6rem;
+            }
         }
 
         .detail-block {
@@ -299,6 +317,7 @@
             text-transform: uppercase;
             color: var(--gold);
             margin-bottom: 2rem;
+            margin-left: 1rem;
             font-weight: 300;
         }
 
@@ -358,15 +377,16 @@
             color: var(--ink);
         }
 
-        /* Story */
+        /* Story & Gift Policy */
         .story-container {
             max-width: 900px;
             margin: 0 auto;
+            text-align: center; /* Center align content */
         }
 
         .story-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-size: clamp(1.2rem, 3vw, 2.2rem);
             line-height: 1.8;
             color: var(--pearl);
             font-weight: 300;
@@ -383,10 +403,10 @@
             font-style: italic;
         }
 
-        /* CTA */
+        /* CTA / RSVP */
         .cta-section {
             background: linear-gradient(180deg, var(--ink), var(--charcoal));
-            padding: clamp(10rem, 25vh, 18rem) 4rem;
+            padding: clamp(8rem, 25vh, 18rem) 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -407,7 +427,7 @@
 
         .cta-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
             font-weight: 300;
             margin-bottom: 2rem;
             color: var(--ivory);
@@ -423,10 +443,10 @@
 
         .cta-button {
             display: inline-block;
-            padding: 1.5rem 4rem;
+            padding: 1.2rem 3rem;
             border: 0.5px solid var(--gold);
             color: var(--ivory);
-            font-size: 0.75rem;
+            font-size: 1.5rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             text-decoration: none;
@@ -465,7 +485,7 @@
 
         /* Footer */
         footer {
-            padding: 4rem;
+            padding: 4rem 2rem;
             text-align: center;
             background: var(--ink);
             border-top: 0.5px solid rgba(212, 165, 116, 0.1);
@@ -488,13 +508,48 @@
             font-weight: 300;
         }
 
+        /* Media Queries for Responsiveness */
+        @media (min-width: 1025px) {
+            .hero-content {
+                margin-top: 42rem; 
+            }
+        }
+
         @media (max-width: 1024px) {
             body { cursor: auto; }
             .cursor, .cursor-follower { display: none; }
             nav { padding: 2rem; }
             .section { padding: 6rem 2rem; }
             .countdown-wrapper { grid-template-columns: repeat(2, 1fr); }
-            .details-layout { grid-template-columns: 1fr; gap: 4rem; }
+            .details-layout { gap: 4rem; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 1.5rem; }
+            .hero-names {
+                margin-bottom: 4rem;
+            }
+            .section-title {
+                margin-bottom: 3rem;
+            }
+            .cta-button {
+                padding: 1.2rem 2.5rem;
+            }
+            .hero-content {
+                margin-top: 42rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+             .countdown-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .time-cell {
+                padding: 2.5rem 1.5rem;
+            }
+            .hero-date {
+                letter-spacing: 0.4em;
+            }
         }
     </style>
 </head>
@@ -506,7 +561,7 @@
     <!-- Navigation -->
     <nav>
         <div class="logo">J & R</div>
-        <div class="nav-date">29.12.2025</div>
+        <div class="nav-date">27|29.12.2025</div>
     </nav>
 
     <!-- Hero -->
@@ -514,11 +569,10 @@
         <div class="hero-bg"></div>
         <div class="hero-grid"></div>
         <div class="hero-content">
-            <div class="hero-label">Joshua Augustine & Rameen Sabir</div>
             <h1 class="hero-names">
                 Joshua <span class="ampersand">&</span> Rameen
             </h1>
-            <div class="hero-date">29 December 2025</div>
+            <div class="hero-label">Joshua Augustine & Rameen Sabir</div>
         </div>
     </section>
 
@@ -544,6 +598,7 @@
                 <span class="time-text">Seconds</span>
             </div>
         </div>
+        <div class="hero-date">27|29 December 2025</div>
     </section>
 
     <!-- Details -->
@@ -555,70 +610,63 @@
                 <div class="detail-number">Venue</div>
                 <h3 class="detail-heading">Grand Sapphire Hotel</h3>
                 <div class="detail-content">
-                    412 Brighton Road<br>
-                    South Croydon CR2 6AN<br>
+                    45 Imperial Way, Croydon CR0 4RR<br>
+                    Croydon CR0 4RR<br>
                     Arrival: 2:30 - 3:00 PM<br>
-                    Celebration until 8:30 PM<br>
                     <br>
                     Free parking on-site<br>
                     Wheelchair accessible
                 </div>
-                <a href="https://maps.google.com" target="_blank" class="detail-link">
+                <!-- MODIFIED: Map link updated -->
+                <a href="https://maps.app.goo.gl/ZC5e5NKLKJVh68wc8" target="_blank" class="detail-link">
                     <span>Get Directions</span>
                 </a>
             </div>
             <div class="detail-block">
-                <div class="detail-number">Dress Code</div>
-                <h3 class="detail-heading">Formal Attire</h3>
+                <div class="detail-number">Photography</div>
+                <h3 class="detail-heading">Capture the Moment</h3>
                 <div class="detail-content">
-                    Suits or tuxedos for gentlemen<br>
-                    Floor-length gowns for ladies<br>
-                    Elegant evening wear preferred<br>
+                    <!-- MODIFIED: QR code added -->
+                    Please share your photos with us, and use the hashtag #JoshuaAndRameen2025<br>
+                    <a href="https://photos.app.goo.gl/oo1nq9vWaQTtPNq9A" target="_blank">
+                        <img src="qr-code(1).png" id="qr-code" alt="Google Photos Album QR Code" style="max-width:150px; margin: 1rem 0; border: 5px solid white; border-radius: 5px;">
+                    </a>
                     <br>
-                    Jewel tones & metallics welcome<br>
-                    Indoor heated venue<br>
-                    Consider comfort for dancing
                 </div>
             </div>
             <div class="detail-block">
                 <div class="detail-number">Schedule</div>
                 <h3 class="detail-heading">Timeline</h3>
                 <div class="detail-content">
-                    2:30 PM — Guest arrival & welcome<br>
-                    3:00 PM — Ceremony begins<br>
-                    4:00 PM — Cocktail reception<br>
-                    5:30 PM — Dinner service<br>
-                    7:00 PM — Speeches & toasts<br>
-                    7:30 PM — First dance & dancing<br>
-                    8:30 PM — Celebration concludes
+                    <!-- MODIFIED: Shortened timeline -->
+                    2:30 PM — Guest Arrival<br>
+                    3:00 PM — Ceremony<br>
+                    8:00 PM — Dinner & Dancing
                 </div>
             </div>
             <div class="detail-block">
-                <div class="detail-number">Photography</div>
-                <h3 class="detail-heading">Capture the Moment</h3>
+                <div class="detail-number">Dress Code</div>
+                <h3 class="detail-heading">Formal Attire</h3>
                 <div class="detail-content">
-                    Unplugged ceremony requested<br>
-                    Professional photographer present<br>
-                    Photos after ceremony welcome<br>
-                    <br>
-                    Share your photos with<br>
-                    #JoshuaAndRameen2025<br>
-                    Digital album to follow
+                    <!-- MODIFIED: Shortened dress code -->
+                    Formal attire is requested.
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Gift Policy -->
-    <section class="section">
-        <div class="section-number">03 — Gift Policy</div>
-        <h2 class="section-title">Your Presence, Our Present</h2>
-        <div class="story-container">
-            <p class="story-text" style="font-style: normal; font-size: 1.2rem; margin-bottom: 3rem;">
-                Your presence at our wedding is the greatest gift we could ask for. If you wish to honor us with a gift, we would be grateful for contributions toward our honeymoon adventure.
+    <!-- MODIFIED: RSVP section moved up -->
+    <section class="section cta-section">
+        <div class="section-number">03 — RSVP</div>
+        <h2 class="section-title">Will You Join Us?</h2>
+        <div class="cta-bg"></div>
+        <div class="cta-content">
+            <p class="cta-subtitle" style="margin-top: -4rem;">
+                Your presence would honor us as we celebrate this milestone.<br>
+                Please respond at your earliest convenience.
             </p>
-            <a href="#" class="cta-button" style="display: inline-block; margin: 0.5rem;">
-                <span>Contribute to Honeymoon</span>
+            <a href="#" class="cta-button">
+                <span>RSVP</span>
             </a>
         </div>
     </section>
@@ -635,17 +683,16 @@
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta-section">
-        <div class="cta-bg"></div>
-        <div class="cta-content">
-            <h2 class="cta-title">Will You Join Us?</h2>
-            <p class="cta-subtitle">
-                Your presence would honor us as we celebrate this milestone.<br>
-                Please respond at your earliest convenience.
+    <!-- MODIFIED: Gift Policy section moved down -->
+    <section class="section">
+        <div class="section-number">05 — Gift Policy</div>
+        <h2 class="section-title">Your Presence, Our Present</h2>
+        <div class="story-container">
+            <p class="story-text" style="font-style: normal; font-size: 1.2rem; margin-bottom: 3rem;">
+                Your presence at our wedding is the greatest gift we could ask for. If you wish to honor us with a gift, we would be grateful for contributions toward our honeymoon adventure.
             </p>
-            <a href="#" class="cta-button">
-                <span>RSVP</span>
+            <a href="#" class="cta-button" style="display: inline-block; margin: 0.5rem;">
+                <span>Contribute to Honeymoon</span>
             </a>
         </div>
     </section>
@@ -658,30 +705,32 @@
 
     <script>
         // Cursor
-        const cursor = document.querySelector('.cursor');
-        const follower = document.querySelector('.cursor-follower');
-        let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0, followerX = 0, followerY = 0;
+        if (window.matchMedia("(min-width: 1025px)").matches) {
+            const cursor = document.querySelector('.cursor');
+            const follower = document.querySelector('.cursor-follower');
+            let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0, followerX = 0, followerY = 0;
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
 
-        function animate() {
-            const delay = 0.15;
-            cursorX += (mouseX - cursorX) * delay;
-            cursorY += (mouseY - cursorY) * delay;
-            followerX += (mouseX - followerX) * delay * 0.5;
-            followerY += (mouseY - followerY) * delay * 0.5;
+            function animate() {
+                const delay = 0.15;
+                cursorX += (mouseX - cursorX) * delay;
+                cursorY += (mouseY - cursorY) * delay;
+                followerX += (mouseX - followerX) * delay * 0.5;
+                followerY += (mouseY - followerY) * delay * 0.5;
 
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-            follower.style.left = followerX + 'px';
-            follower.style.top = followerY + 'px';
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                follower.style.left = followerX + 'px';
+                follower.style.top = followerY + 'px';
 
-            requestAnimationFrame(animate);
+                requestAnimationFrame(animate);
+            }
+            animate();
         }
-        animate();
 
         // Countdown
         const weddingDate = new Date('2025-12-29T15:00:00').getTime();
@@ -691,9 +740,10 @@
             const distance = weddingDate - now;
 
             if (distance < 0) {
-                ['days', 'hours', 'minutes', 'seconds'].forEach(id => 
-                    document.getElementById(id).textContent = '00'
-                );
+                ['days', 'hours', 'minutes', 'seconds'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = '00';
+                });
                 return;
             }
 
@@ -712,21 +762,25 @@
         setInterval(updateCountdown, 1000);
 
         // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '-50px' });
+        try {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '-50px' });
 
-        document.querySelectorAll('.time-cell, .detail-block').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
-            observer.observe(el);
-        });
+            document.querySelectorAll('.time-cell, .detail-block').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                observer.observe(el);
+            });
+        } catch(e) {
+            console.error("IntersectionObserver not supported.", e);
+        }
     </script>
 </body>
 </html>
