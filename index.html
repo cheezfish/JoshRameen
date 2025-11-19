@@ -754,14 +754,13 @@
         <div class="details-layout">
             <div class="detail-block">
                 <div class="detail-number">Venue</div>
-                <h3 class="detail-heading">Grand Sapphire Hotel</h3>
+                <h3 class="detail-heading">Rhubarb Suite</h3>
                 <div class="detail-content">
                     45 Imperial Way<br>
                     CR0 4RR<br>
                     Arrival: 2:30 - 3:00 PM<br>
                     <br>
-                    Free parking on-site<br>
-                    Wheelchair accessible
+                    Free parking is available on-site
                 </div>
                 <a href="https://maps.app.goo.gl/ZC5e5NKLKJVh68wc8" target="_blank" class="detail-link">
                     <span>Get Directions</span>
@@ -769,9 +768,9 @@
             </div>
             <div class="detail-block">
                 <div class="detail-number">Photography</div>
-                <h3 class="detail-heading">Capture the Moment</h3>
+                <h3 class="detail-heading">Photos</h3>
                 <div class="detail-content">
-                    Please share your photos with us, and use the hashtag #JoshuaAndRameen2025<br>
+                    We want to see the night through your eyes! Please snap away and tag us so we can collect all the memories. <br> Hashtag: #JoshuaAndRameen2025<br>
                     <a href="https://photos.app.goo.gl/oo1nq9vWaQTtPNq9A" target="_blank">
                         <img src="qr-code(1).png" id="qr-code" alt="Google Photos Album QR Code" style="max-width:150px; margin: 1rem 0; border: 5px solid white; border-radius: 5px;">
                     </a>
@@ -780,18 +779,20 @@
             </div>
             <div class="detail-block">
                 <div class="detail-number">Schedule</div>
-                <h3 class="detail-heading">Timeline</h3>
+                <h3 class="detail-heading">The Day</h3>
                 <div class="detail-content">
-                    2:30 PM — Guest Arrival<br>
-                    3:00 PM — Ceremony<br>
-                    8:00 PM — Dinner & Dancing
+                    12:00 PM — Arrival<br>
+                    1:00 PM — Ceremony Starts<br>
+                    4:00 PM — Bride & Groom Entrance<br>
+                    5:00 PM - Dinner Starts <br>
+                    8:00 PM - End of Proceedings<br>
                 </div>
             </div>
             <div class="detail-block">
                 <div class="detail-number">Dress Code</div>
-                <h3 class="detail-heading">Formal Attire</h3>
+                <h3 class="detail-heading">Attire</h3>
                 <div class="detail-content">
-                    Formal attire is requested.
+                    Formal attire or Traditional Dress.
                 </div>
             </div>
         </div>
@@ -799,38 +800,27 @@
 
     <section class="section cta-section" id="rsvp">
         <div class="section-number">03 — RSVP</div>
-        <h2 class="section-title">Will You Join Us?</h2>
+        <h2 class="section-title">See You There?</h2>
         <div class="cta-content">
             <p class="cta-subtitle">
-                Your presence would honor us as we celebrate this milestone.<br>
-                Please respond at your earliest convenience.
+                We can’t wait to celebrate with you.<br>
+                Please let us know if you can make it by 25/11/2025.
             </p>
             <a href="#rsvp" class="cta-button" onclick="openRsvpModal()">
-                <span>RSVP</span>
+                <span>RSVP Here</span>
             </a>
         </div>
     </section>
 
     <section class="section">
-        <div class="section-number">04 — Our Story</div>
-        <h2 class="section-title">Two Become One</h2>
-        <div class="story-container">
-            <p class="story-text">
-                In the intersection of fate and choice, we found each other. What began as a chance encounter evolved into an undeniable connection—one built on trust, laughter, and the kind of love that only grows deeper with time. Now, we invite you to witness the next chapter of our story as we commit to a lifetime together.
-            </p>
-            <div class="story-signature">Joshua & Rameen</div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="section-number">05 — Gift Policy</div>
-        <h2 class="section-title">Your Presence, Our Present</h2>
+        <div class="section-number">04 — Gift Policy</div>
+        <h2 class="section-title">Gifts</h2>
         <div class="story-container">
             <p class="story-text" style="font-style: normal; font-size: 1.2rem; margin-bottom: 3rem;">
-                Your presence at our wedding is the greatest gift we could ask for. If you wish to honor us with a gift, we would be grateful for contributions toward our honeymoon adventure.
+                The biggest gift is you joining us to celebrate. Please do not feel obliged, but if you’d like to give a gift, a contribution towards our honeymoon would be truly appreciated.
             </p>
             <a href="https://prezola.com/buy/view/262806" class="cta-button" style="display: inline-block; margin: 0.5rem;">
-                <span>Contribute to Honeymoon</span>
+                <span>Contribute</span>
             </a>
         </div>
     </section>
@@ -971,6 +961,7 @@
         async function findInvitation() {
             const code = document.getElementById('rsvp-code-input').value.trim().toUpperCase();
             const messageEl = document.getElementById('lookup-message');
+
             if (!code) {
                 messageEl.innerText = "Please enter a code.";
                 return;
@@ -984,6 +975,7 @@
                 const data = await response.json();
                 familyData = Array.isArray(data) ? data : [data];
 
+                // Check if we got any data back
                 if (familyData.length === 0 || !familyData[0]['Invitation Recipient']) {
                     messageEl.innerText = "Sorry, we could not find an invitation with that code. Please check and try again.";
                     return;
@@ -992,8 +984,16 @@
                 document.getElementById('lookup-view').style.display = 'none';
                 document.getElementById('form-view').style.display = 'block';
                 
-                const inviteAllocation = parseInt(familyData[0]['Number of Invites Allocated'], 10);
-                const familyName = familyData[0]['Family Name'];
+                // 1. Get Setup Data from Head of Household
+                const primaryGuest = familyData[0];
+                let inviteAllocation = parseInt(primaryGuest['Number of Invites Allocated'], 10);
+                
+                // Fallback if allocation is missing/zero
+                if (isNaN(inviteAllocation) || inviteAllocation < 1) {
+                    inviteAllocation = 1;
+                }
+
+                const familyName = primaryGuest['Family Name'];
 
                 document.getElementById('family-name-title').innerText = `RSVP for the ${familyName} Family`;
                 document.getElementById('form-subtitle').innerText = `Your invitation includes ${inviteAllocation} spot(s). Please confirm attendance for each guest.`;
@@ -1001,18 +1001,32 @@
                 const attendeeListEl = document.getElementById('attendee-list');
                 attendeeListEl.innerHTML = '';
 
+                // 2. Loop exactly X times based on Allocation
                 for (let i = 0; i < inviteAllocation; i++) {
-                    const guestData = familyData[i];
-                    if (!guestData) {
-                        console.error(`Error: Invite allocation is ${inviteAllocation}, but only ${i} rows were found in the sheet for this family. Please check your sheet.`);
-                        continue;
-                    }
+                    
+                    const guestData = familyData[i]; // This will be undefined for guest 2, 3, etc. if not in n8n
+                    let uniqueId;
+                    let displayName = `Guest ${i + 1}`; // Default name
 
-                    const uniqueId = guestData['UniqueID'];
+                    if (guestData) {
+                        // -- Scenario A: We have data for this person --
+                        uniqueId = guestData['UniqueID'];
+                        
+                        // If it's the first person, use Recipient Name. Otherwise check for Guest Name.
+                        if (i === 0 && guestData['Invitation Recipient']) {
+                            displayName = guestData['Invitation Recipient'];
+                        } else if (guestData['Guest Name']) {
+                            displayName = guestData['Guest Name'];
+                        }
+                    } else {
+                        // -- Scenario B: We DO NOT have data (The +1s) --
+                        // Use the Main ID + index to create a unique ID
+                        uniqueId = `${primaryGuest['UniqueID']}-guest-${i}`;
+                    }
                     
                     const rowHtml = `
                         <div class="attendee-row" data-uniqueid="${uniqueId}">
-                            <div class="attendee-name">Guest ${i + 1}</div>
+                            <div class="attendee-name">${displayName}</div>
                             <div class="form-group radio-group">
                                 <label for="attend-yes-${i}">
                                     <input type="radio" id="attend-yes-${i}" name="attending-${i}" value="Yes">
@@ -1037,9 +1051,8 @@
                     attendeeListEl.innerHTML += rowHtml;
                 }
 
-                // NEW: Add event listener for the whole form AFTER it's created
+                // Re-attach event listener
                 attendeeListEl.addEventListener('change', function(event) {
-                    // Check if the changed element is a radio button
                     if (event.target.type === 'radio') {
                         const row = event.target.closest('.attendee-row');
                         const details = row.querySelector('.guest-details');
