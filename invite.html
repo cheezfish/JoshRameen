@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation for {{ $json["Guest Name"] }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* PDF Print Optimization */
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #161B22;
+            --gold-gradient: linear-gradient(to right, #bf953f, #e3c472, #b38728, #e3c472, #aa771c);
+            --gold-flat: #D4A574;
+            --ivory: #F0F6FC;
+            --smoke: #8B949E;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0D1117;
+            font-family: 'Jost', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .invitation-card {
+            width: 600px;
+            background-color: var(--bg-color); 
+            /* Subtle paper texture */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            
+            border: 2px solid var(--gold-flat);
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            margin: 20px auto;
+        }
+
+        .inner-border {
+            border: 1px solid rgba(212, 165, 116, 0.3);
+            padding: 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* --- Content Styling --- */
+        
+        .guest-section {
+            width: 100%;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            z-index: 2;
+        }
+        .guest-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold-flat);
+            margin-bottom: 5px;
+        }
+        .guest-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .photo-frame {
+            width: 90%;
+            height: 300px;
+            background-image: url('https://i.ibb.co/v4VJ99j1/jnrinvite.png');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--gold-flat);
+            outline: 4px solid #222;
+            margin-bottom: 2rem;
+            z-index: 2;
+        }
+
+        .host-names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--ivory);
+            margin: 0 0 0.5rem 0; /* Reduced bottom margin */
+            line-height: 1.2;
+        }
+        
+        /* UPDATED: Matches parent color, tighter spacing */
+        .invite-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--ivory); /* Changed from --smoke to --ivory */
+            margin: 0 0 1.5rem 0; /* Reduced from 2rem */
+            line-height: 1.4;
+        }
+
+        .couple-container { margin-bottom: 1rem; }
+        
+        .couple-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            line-height: 1.1;
+            margin: 0;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent; 
+        }
+        @media print {
+            .couple-name {
+                background: none;
+                color: #D4A574;
+                -webkit-text-fill-color: #D4A574;
+            }
+        }
+
+        .ampersand {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: var(--smoke);
+            margin: 5px 0;
+            display: block;
+        }
+
+        /* UPDATED: Tighter spacing */
+        .groom-parents {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--ivory);
+            margin-top: 0.5rem; /* Reduced from 1rem */
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .divider {
+            width: 150px;
+            height: 1px;
+            background: var(--gold-flat);
+            margin: 2rem auto;
+            opacity: 0.5;
+        }
+
+        .details-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 4rem;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        .details-block { text-align: center; }
+        .details-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--gold-flat);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        .details-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            line-height: 1.4;
+            color: var(--ivory);
+            margin: 0;
+        }
+        .arrival-note {
+            font-size: 0.9rem;
+            color: var(--smoke);
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        .rsvp-box {
+            width: 90%;
+            border-top: 1px solid rgba(212, 165, 116, 0.2);
+            padding-top: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .rsvp-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--ivory);
+            margin-bottom: 0.5rem;
+        }
+        .website-link {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.1rem;
+            color: var(--gold-flat);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gold-flat);
+            padding-bottom: 2px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .qr-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,0.03);
+            padding: 10px 20px;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+        }
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            border: 3px solid #fff;
+            display: block;
+        }
+        .qr-text-group { text-align: left; }
+        .qr-label {
+            font-size: 0.7rem;
+            color: var(--smoke);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .qr-code-val {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold-flat);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="invitation-card">
+        <div class="inner-border">
+            
+            <div class="guest-section">
+                <div class="guest-label">Prepared For</div>
+                <div class="guest-name">{{ $json["Invitation Recipient"] }}</div>
+            </div>
+
+            <div class="photo-frame"></div>
+
+            <h2 class="host-names">Mr. Wasif Sabir & Mrs. Sadia Sabir</h2>
+            <div class="invite-text">Cordially invite you to the marriage of their daughter</div>
+
+            <div class="couple-container">
+                <h1 class="couple-name">Rameen</h1>
+                <span class="ampersand">and</span>
+                <h1 class="couple-name">Joshua</h1>
+            </div>
+
+            <div class="groom-parents">
+                Son of Mr. Augustine Sebastian & Mrs. Mary Liny Augustine
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="details-container">
+                <div class="details-block">
+                    <div class="details-label">On</div>
+                    <p class="details-text">Monday 29th December</p>
+                    <p class="details-text">12:00 - 20:00</p>
+                </div>
+                
+                <div class="details-block">
+                    <div class="details-label">At</div>
+                    <p class="details-text">Grand Sapphire</p>
+                    <p class="details-text">45 Imperial Way</p>
+                    <p class="details-text">CR0 4RR</p>
+                    <p class="arrival-note">Arrival: 2:30 - 3:00 PM</p>
+                </div>
+            </div>
+
+            <div class="rsvp-box">
+                <div class="rsvp-text">Please RSVP by visiting</div>
+                <a href="https://joshuaandrameen.com" target="_blank" class="website-link">
+                    joshuaandrameen.com
+                </a>
+                
+                <div class="qr-container">
+                    <img src="{{ $json.QRcodeHelper }}" alt="RSVP QR" class="qr-code">
+                    <div class="qr-text-group">
+                        <div class="qr-label">Or Scan</div>
+                        <div class="qr-label">Your Code:</div>
+                        <div class="qr-code-val">{{ $json.Code }}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

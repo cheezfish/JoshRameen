@@ -38,6 +38,18 @@
         body.modal-open {
             overflow: hidden;
         }
+        
+        /* --- PARTICLES CONTAINER --- */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: transparent;
+            z-index: 0; /* Behind content, in front of background color */
+            pointer-events: none; /* Allows clicking through to links/buttons */
+        }
 
         #qr-code {
             filter: invert(0.925);
@@ -124,6 +136,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+            z-index: 1; /* Ensures hero sits above particles */
         }
 
         .hero-bg {
@@ -164,7 +177,7 @@
 
         .hero-label {
             display: inline-block;
-            font-size: 0.7rem;
+            font-size: 1rem;
             letter-spacing: 0.4em;
             text-transform: uppercase;
             color: var(--smoke);
@@ -200,7 +213,7 @@
         }
 
         .hero-date {
-            font-size: clamp(1rem, 4vw, 1.2rem);
+            font-size: clamp(1rem, 4vw, 1.8rem);
             letter-spacing: 0.6em;
             text-transform: uppercase;
             color: var(--accent);
@@ -220,6 +233,7 @@
             max-width: 1400px;
             margin: 0 auto;
             position: relative;
+            z-index: 1; /* Ensures content sits above particles */
         }
 
         .section-number {
@@ -285,7 +299,7 @@
         }
 
         .time-text {
-            font-size: 0.7rem;
+            font-size: 1rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             color: var(--smoke);
@@ -342,7 +356,7 @@
         }
 
         .detail-content {
-            font-size: 1.2rem;
+            font-size: 1.5rem; 
             line-height: 2;
             color: var(--smoke);
             font-weight: 300;
@@ -351,7 +365,7 @@
 
         .detail-link {
             display: inline-block;
-            margin-top: auto; /* Pushes button to bottom */
+            margin-top: auto; 
             padding: 0.75rem 2rem;
             border: 0.5px solid var(--gold);
             color: var(--ivory);
@@ -438,7 +452,7 @@
         }
 
         .cta-subtitle {
-            font-size: 1rem;
+            font-size: 1.5rem; 
             color: var(--smoke);
             letter-spacing: 0.05em;
             line-height: 1.8;
@@ -496,6 +510,8 @@
             text-align: center;
             background: var(--ink);
             border-top: 0.5px solid rgba(212, 165, 116, 0.1);
+            position: relative;
+            z-index: 1;
         }
 
         .footer-monogram {
@@ -505,6 +521,7 @@
             margin-bottom: 1rem;
             font-weight: 300;
             letter-spacing: 0.2em;
+            margin-right: -0.2em; 
         }
 
         .footer-text {
@@ -513,6 +530,7 @@
             text-transform: uppercase;
             color: var(--smoke);
             font-weight: 300;
+            margin-right: -0.3em; 
         }
 
         /* --- RSVP MODAL STYLES --- */
@@ -611,7 +629,7 @@
             font-weight: 400;
         }
         .radio-group {
-            margin-bottom: 1rem; /* Added margin for spacing */
+            margin-bottom: 1rem; 
         }
         .radio-group label {
             margin-right: 1.5rem;
@@ -646,13 +664,12 @@
             min-height: 1em;
         }
         
-        /* NEW STYLES FOR HIDING/SHOWING GUEST DETAILS */
         .guest-details {
-            display: none; /* Hidden by default */
+            display: none; 
             margin-top: 1rem;
         }
         .guest-details.visible {
-            display: block; /* Shown when 'Attending' is checked */
+            display: block; 
         }
 
         /* Media Queries for Responsiveness */
@@ -704,6 +721,9 @@
     </style>
 </head>
 <body>
+    <!-- Particles Container -->
+    <div id="particles-js"></div>
+
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
     <div class="grain"></div>
@@ -756,9 +776,10 @@
                 <div class="detail-number">Venue</div>
                 <h3 class="detail-heading">Rhubarb Suite</h3>
                 <div class="detail-content">
+                    Grand Sapphire Hotel & Banqueting<br>
                     45 Imperial Way<br>
                     CR0 4RR<br>
-                    Arrival: 2:30 - 3:00 PM<br>
+                    Arrival: 12:00 - 12:30 PM<br>
                     <br>
                     Free parking is available on-site
                 </div>
@@ -784,8 +805,8 @@
                     12:00 PM — Arrival<br>
                     1:00 PM — Ceremony Starts<br>
                     4:00 PM — Bride & Groom Entrance<br>
-                    5:00 PM - Dinner Starts <br>
-                    8:00 PM - End of Proceedings<br>
+                    5:00 PM — Dinner Starts <br>
+                    8:00 PM — End of Proceedings<br>
                 </div>
             </div>
             <div class="detail-block">
@@ -816,7 +837,7 @@
         <div class="section-number">04 — Gift Policy</div>
         <h2 class="section-title">Gifts</h2>
         <div class="story-container">
-            <p class="story-text" style="font-style: normal; font-size: 1.2rem; margin-bottom: 3rem;">
+            <p class="story-text" style="font-style: normal; font-size: 2.5rem; margin-bottom: 3rem;">
                 The biggest gift is you joining us to celebrate. Please do not feel obliged, but if you’d like to give a gift, a contribution towards our honeymoon would be truly appreciated.
             </p>
             <a href="https://prezola.com/buy/view/262806" class="cta-button" style="display: inline-block; margin: 0.5rem;">
@@ -860,8 +881,83 @@
         </div>
     </div>
 
-
+    <!-- Particles.js Library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
     <script>
+        // --- PARTICLES CONFIGURATION ---
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 70,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#ffffff", "#D4A574"] // White and Gold
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 0.5,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": false, // Disabled for "flecks" look
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 0.6,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": false // Disabled to keep it subtle and not conflict with custom cursor
+                    },
+                    "onclick": {
+                        "enable": false
+                    },
+                    "resize": true
+                }
+            },
+            "retina_detect": true
+        });
+
         // --- EXISTING SCRIPT: CURSOR ---
         if (window.matchMedia("(min-width: 1025px)").matches) {
             const cursor = document.querySelector('.cursor');
@@ -957,7 +1053,7 @@
             document.body.classList.remove('modal-open');
         }
 
-        // --- REWRITTEN FUNCTION 1: Generates BLANK, fillable slots with conditional visibility ---
+        // --- REWRITTEN FUNCTION: Handles CSV parsing for editing & Generic Guest Labels ---
         async function findInvitation() {
             const code = document.getElementById('rsvp-code-input').value.trim().toUpperCase();
             const messageEl = document.getElementById('lookup-message');
@@ -975,75 +1071,79 @@
                 const data = await response.json();
                 familyData = Array.isArray(data) ? data : [data];
 
-                // Check if we got any data back
                 if (familyData.length === 0 || !familyData[0]['Invitation Recipient']) {
-                    messageEl.innerText = "Sorry, we could not find an invitation with that code. Please check and try again.";
+                    messageEl.innerText = "Sorry, we could not find an invitation with that code.";
                     return;
                 }
 
                 document.getElementById('lookup-view').style.display = 'none';
                 document.getElementById('form-view').style.display = 'block';
                 
-                // 1. Get Setup Data from Head of Household
                 const primaryGuest = familyData[0];
                 let inviteAllocation = parseInt(primaryGuest['Number of Invites Allocated'], 10);
-                
-                // Fallback if allocation is missing/zero
-                if (isNaN(inviteAllocation) || inviteAllocation < 1) {
-                    inviteAllocation = 1;
-                }
+                if (isNaN(inviteAllocation) || inviteAllocation < 1) inviteAllocation = 1;
 
                 const familyName = primaryGuest['Family Name'];
-
                 document.getElementById('family-name-title').innerText = `RSVP for the ${familyName} Family`;
-                document.getElementById('form-subtitle').innerText = `Your invitation includes ${inviteAllocation} spot(s). Please confirm attendance for each guest.`;
+                document.getElementById('form-subtitle').innerText = `Your invitation includes ${inviteAllocation} spot(s).`;
 
                 const attendeeListEl = document.getElementById('attendee-list');
                 attendeeListEl.innerHTML = '';
 
-                // 2. Loop exactly X times based on Allocation
+                // --- PARSE EXISTING SAVED DATA ---
+                // If 'Guest Name' cell contains "John, Jane", split into array ["John", "Jane"]
+                let existingNames = [];
+                if (primaryGuest['Guest Name']) {
+                    existingNames = primaryGuest['Guest Name'].split(',').map(s => s.trim());
+                }
+                
+                // If 'Notes' cell contains "Nut allergy | No sesame", split it
+                let existingNotes = [];
+                if (primaryGuest['Notes']) {
+                    existingNotes = primaryGuest['Notes'].split('|').map(s => s.trim());
+                }
+
+                // --- GENERATE FORM SLOTS ---
                 for (let i = 0; i < inviteAllocation; i++) {
                     
-                    const guestData = familyData[i]; // This will be undefined for guest 2, 3, etc. if not in n8n
-                    let uniqueId;
-                    let displayName = `Guest ${i + 1}`; // Default name
+                    // 1. Determine if this slot was previously saved
+                    const savedName = existingNames[i] || ""; 
+                    const savedNote = existingNotes[i] || "";
+                    const isPreviouslyAttending = savedName.length > 0;
 
-                    if (guestData) {
-                        // -- Scenario A: We have data for this person --
-                        uniqueId = guestData['UniqueID'];
-                        
-                        // If it's the first person, use Recipient Name. Otherwise check for Guest Name.
-                        if (i === 0 && guestData['Invitation Recipient']) {
-                            displayName = guestData['Invitation Recipient'];
-                        } else if (guestData['Guest Name']) {
-                            displayName = guestData['Guest Name'];
-                        }
-                    } else {
-                        // -- Scenario B: We DO NOT have data (The +1s) --
-                        // Use the Main ID + index to create a unique ID
-                        uniqueId = `${primaryGuest['UniqueID']}-guest-${i}`;
-                    }
-                    
+                    // 2. Generic Label (Guest 1, Guest 2) OR "Guest 1 (Saved Name)" if you prefer
+                    // User requested just "Guest X"
+                    let displayName = `Guest ${i + 1}`;
+
+                    // 3. Determine Radio Button State
+                    const yesChecked = isPreviouslyAttending ? "checked" : "";
+                    const noChecked = !isPreviouslyAttending ? "checked" : "";
+                    const detailsClass = isPreviouslyAttending ? "guest-details visible" : "guest-details";
+
+                    // 4. Base Unique ID (The code in the sheet)
+                    const uniqueId = primaryGuest['UniqueID'];
+
                     const rowHtml = `
                         <div class="attendee-row" data-uniqueid="${uniqueId}">
                             <div class="attendee-name">${displayName}</div>
+                            
                             <div class="form-group radio-group">
-                                <label for="attend-yes-${i}">
-                                    <input type="radio" id="attend-yes-${i}" name="attending-${i}" value="Yes">
+                                <label>
+                                    <input type="radio" name="attending-${i}" value="Yes" ${yesChecked}>
                                     <span></span> Attending
                                 </label>
-                                <label for="attend-no-${i}">
-                                    <input type="radio" id="attend-no-${i}" name="attending-${i}" value="No" checked>
+                                <label>
+                                    <input type="radio" name="attending-${i}" value="No" ${noChecked}>
                                     <span></span> Not Attending
                                 </label>
                             </div>
-                            <div class="guest-details">
+
+                            <div class="${detailsClass}">
                                 <div class="form-group">
-                                    <label for="guest-name-${i}" style="display:none;">Full Name</label>
-                                    <input type="text" id="guest-name-${i}" class="guest-name-input" placeholder="Full Name">
+                                    <input type="text" class="guest-name-input" placeholder="Full Name" value="${savedName}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="notes-input" placeholder="Dietary Needs or Notes">
+                                    <input type="text" class="notes-input" placeholder="Dietary Needs / Notes" value="${savedNote}">
                                 </div>
                             </div>
                         </div>
@@ -1051,7 +1151,7 @@
                     attendeeListEl.innerHTML += rowHtml;
                 }
 
-                // Re-attach event listener
+                // Re-attach event listener for visibility toggling
                 attendeeListEl.addEventListener('change', function(event) {
                     if (event.target.type === 'radio') {
                         const row = event.target.closest('.attendee-row');
@@ -1066,7 +1166,7 @@
 
             } catch (error) {
                 messageEl.innerText = "An error occurred. Please try again later.";
-                console.error('Error fetching invitation:', error);
+                console.error(error);
             }
         }
 
